@@ -12,9 +12,7 @@ struct MemoryStruct
 };
 std::vector<std::string> vURLaddress = {
     "http://www.example.com",
-    "https://justjoin.it",
-    "https://www.wp.pl/",
-    "https://github.com/"
+    "https://justjoin.it"
 };
 std::vector<int> handshakeSize(vURLaddress.size());
 
@@ -38,7 +36,7 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
   memcpy(&(mem->memory[mem->size]), contents, realsize);
   mem->size += realsize;
   mem->memory[mem->size] = 0;
-  std::cout << callIteration << " real size: " << realsize << std::endl;
+  // std::cout << callIteration << " real size: " << realsize << std::endl;
 
   if (urlChange != addressCurrentIteration)
   {
@@ -48,6 +46,14 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
     urlChange += 1;
     // std::cout << "size argument " << size << std::endl;
     std::cout << "nmemb " << nmemb << std::endl;
+    std::cout << "Content of URL: " << std::endl;
+    int currentCharacterContent = 0;
+    while (currentCharacterContent < realsize){
+      std::cout << *(mem->memory + currentCharacterContent);
+      if(currentCharacterContent % 20 == 0)
+        std::cout << std::endl;
+      currentCharacterContent++;
+    }
   }
   callIteration++;
   return realsize;
