@@ -76,12 +76,13 @@ int main(void)
 
   /* some servers don't like requests that are made without a user-agent
      field, so we provide one */
-  // curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "libcurl-agent/1.0");
+  curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 
   for (addressCurrentIteration = 0; addressCurrentIteration < vURLaddress.size(); addressCurrentIteration++)
   {
+    std::cout << vURLaddress[addressCurrentIteration] << std::endl;
     /* specify URL to get */
-    curl_easy_setopt(curl_handle, CURLOPT_URL, "https://www.wp.pl/");
+    curl_easy_setopt(curl_handle, CURLOPT_URL, vURLaddress[addressCurrentIteration].c_str());
 
     /* get it! */
     res = curl_easy_perform(curl_handle);
